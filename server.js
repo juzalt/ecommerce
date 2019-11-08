@@ -8,7 +8,6 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const path = require("path");
 
 app.prepare().then(() => {
   const server = express();
@@ -19,8 +18,12 @@ app.prepare().then(() => {
   server.use(bodyParser.urlencoded({ extended: false }));
   server.use(cookieParser());
 
-  server.get("producto", (req, res) => {
-    return app.render(req, res, 'product', req.query);
+  server.get("/producto", (req, res) => {
+    return app.render(req, res, '/product', req.query);
+  });
+
+  server.get("/carro", (req, res) => {
+    return app.render(req, res, '/cart', req.query);
   });
 
   server.get("*", (req, res) => {

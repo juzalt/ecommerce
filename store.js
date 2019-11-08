@@ -9,27 +9,15 @@ const initialState = {
 }
 
 export const actionTypes = {
-  TICK: 'TICK',
-  ADD_TO_CART: 'ADD_TO_CART',
-  DECREMENT: 'DECREMENT',
-  RESET: 'RESET'
+  ADD_TO_CART: 'ADD_TO_CART'
 }
 
 // REDUCERS
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.TICK:
-      return Object.assign({}, state, {
-        lastUpdate: action.ts,
-        light: !!action.light
-      })
     case actionTypes.ADD_TO_CART:
       return Object.assign({}, state, {
         productCart: action.product
-      })
-    case actionTypes.DECREMENT:
-      return Object.assign({}, state, {
-        count: state.count - 1
       })
     default:
       return state

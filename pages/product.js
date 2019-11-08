@@ -9,7 +9,8 @@ class Product extends React.Component {
       productImg: [],
       title: "",
       base_price: "",
-      sold_quantity: ""
+      sold_quantity: "",
+      thumbnail: ""
     }
   }
 
@@ -22,7 +23,8 @@ class Product extends React.Component {
         productImg: response.data.pictures[0].url,
         title: response.data.title,
         base_price: response.data.base_price,
-        sold_quantity: response.data.sold_quantity
+        sold_quantity: response.data.sold_quantity,
+        thumbnail: response.data.thumbnail
       }
     };
   }
@@ -57,14 +59,6 @@ class Product extends React.Component {
           }
 
           `}</style>
-          <style jsx global>
-            {`
-              body {
-                margin: 0;
-                background-color: #ecebeb;
-              }
-            `}
-          </style>
       </React.Fragment>
     )
   }
