@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
 import { setDiscount } from '../store';
 
 
@@ -24,13 +24,14 @@ class Discount extends React.Component {
   }
   
   handleClick() {
+    const {dispatch} = this.props
     switch (this.state.input) {
       case "courseit2019":
         this.setState({
           validationCodeMessage: "Código aplicado!",
           validationCode: true,
           discountPercentage: 10
-        })
+        }, () => {dispatch(setDiscount(this.state.discountPercentage))})
         break;
       case "":
         this.setState({
@@ -48,13 +49,12 @@ class Discount extends React.Component {
   }
 
   render(){
-    const dispatch = useDispatch();
     return(
       <React.Fragment>
           <label>
             <input className="couponValidationForm" type="text" name="name" placeholder="Código de descuento" onChange={(e) => this.handleChange(e)} />
           </label>
-          <button className="button" title="Aplicar" onClick={(e) => this.handleClick(e) && dispatch(setDiscount(state.discountPercentage)) } />
+          <button className="button" title="Aplicar" onClick={(e) => this.handleClick(e)} />
           <p>{this.state.validationCodeMessage}</p>
         <style jsx>
         {`
@@ -80,4 +80,4 @@ class Discount extends React.Component {
 }
 
 
-export default Discount;
+export default connect()(Discount);
