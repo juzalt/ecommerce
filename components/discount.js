@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { setDiscount } from '../store';
 
 
@@ -15,8 +15,6 @@ class Discount extends React.Component {
     }
   }
 
-  
-  
   handleChange(e){
     this.setState({
       input: e.target.value
