@@ -5,11 +5,13 @@ import thunkMiddleware from 'redux-thunk'
 const initialState = {
   lastUpdate: 0,
   light: false,
-  productCart: {}
+  productCart: {},
+  discountPercentage: 0
 }
 
 export const actionTypes = {
-  ADD_TO_CART: 'ADD_TO_CART'
+  ADD_TO_CART: 'ADD_TO_CART',
+  SET_DISCOUNT: 'SET_DISCOUNT'
 }
 
 // REDUCERS
@@ -19,24 +21,22 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         productCart: action.product
       })
+    case actionTypes.SET_DISCOUNT:
+      return Object.assign({}, state, {
+        discountPercentage: action.discountPercentage
+      })
     default:
       return state
   }
 }
 
 // ACTIONS
-export const serverRenderClock = isServer => dispatch => {
-  return dispatch({ type: actionTypes.TICK, light: !isServer, ts: Date.now() })
-}
-
-export const startClock = dispatch => {
-  return setInterval(() => {
-    dispatch({ type: actionTypes.TICK, light: true, ts: Date.now() })
-  }, 1000)
-}
-
 export const addToCart = (product) => dispatch => {
   return dispatch({ type: actionTypes.ADD_TO_CART, product })
+}
+
+export const setDiscount = (discountPercentage) => dispatch => {
+  return dispatch({ type: actionTypes.SET_DISCOUNT, discountPercentage })
 }
 
 export function initializeStore (initialState) {

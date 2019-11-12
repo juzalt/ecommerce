@@ -3,6 +3,11 @@ import { connect } from 'react-redux'
 import Discount from '../components/discount';
 
 class Cart extends React.Component {
+
+  handleClick(){
+    console.log(this.props.discountPercentage)
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -14,6 +19,8 @@ class Cart extends React.Component {
           </div>
           <div className="cartLowerSection">
             <p className="productPrice">Producto {this.props.product.base_price}</p>
+            <button onClick={() => this.handleClick()} />
+            <p className="discountApplied">Discount: {this.props.discountPercentage}</p>
             <p className="totalPrice">Total {this.props.product.base_price}</p>
           </div>
           <Discount />
@@ -39,9 +46,10 @@ class Cart extends React.Component {
   }
 }
 
-function mapStateToProps(store){
+function mapStateToProps(state){
   return {
-    product: store.productCart
+    product: state.productCart,
+    discountPercentage: state.discountPercentage
   }
 }
 
