@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { setDiscount } from '../store';
+import { setDiscount, setAmountDiscounted } from '../store';
 
 
 class Discount extends React.Component {
@@ -11,7 +11,8 @@ class Discount extends React.Component {
       input: "",
       validationCode: false,
       validationCodeMessage: "",
-      discountPercentage: 0
+      discountPercentage: 0,
+      amount_discounted: 0
     }
   }
 
@@ -22,14 +23,19 @@ class Discount extends React.Component {
   }
   
   handleClick() {
+    const basePrice = this.props.basePrice;
     const {dispatch} = this.props
+    console.log(basePrice, "basePrice");
     switch (this.state.input) {
       case "courseit2019":
+        //change the hardcoded 10 in amount_discounted to receive dynamic values
         this.setState({
+          discountPercentage: 10,
           validationCodeMessage: "Código aplicado!",
           validationCode: true,
-          discountPercentage: 10
-        }, () => {dispatch(setDiscount(this.state.discountPercentage))})
+          amount_discounted: 10 * basePrice / 100,
+          final_price: basePrice - this.state.amount_discounted
+        }, () => {dispatch(setDiscount(this.state.discountPercentage)), dispatch(setAmountDiscounted(this.state.amount_discounted))})
         break;
       case "":
         this.setState({
@@ -77,5 +83,10 @@ class Discount extends React.Component {
   }
 }
 
+function mapStateToProps(state){
+  return {
+    basePrice: state.productCart.base_price
+  }
+}
 
-export default connect()(Discount);
+export default connect(mapStateToProps)(Discount);
