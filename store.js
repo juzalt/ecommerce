@@ -34,6 +34,7 @@ export const reducer = (state = initialState, action) => {
         finalPrice: action.finalPrice
       })
     case actionTypes.SET_AMOUNT_DISCOUNTED:
+      console.log(action)
       return Object.assign({}, state, {
         amountDiscounted: action.amountDiscounted
       })

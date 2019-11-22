@@ -3,13 +3,6 @@ import { connect } from 'react-redux'
 import Discount from '../components/discount';
 
 class Cart extends React.Component {
-constructor(props){
-  super(props);
-
-  this.state = {
-    final_price: this.props.basePrice - this.props.amountDiscounted
-  }
-}
 
   render(){
     return (
@@ -23,7 +16,7 @@ constructor(props){
           <div className="cartLowerSection">
             <p className="productPrice">Producto {this.props.product.base_price}</p>
             <p className="discountApplied">Discount: {this.props.discountPercentage} %</p>
-            <p className="totalPrice">Total {this.state.final_price}</p>
+            <p className="totalPrice">Total {this.props.basePrice - this.props.amountDiscounted}</p>
           </div>
           <Discount />
         </div>
